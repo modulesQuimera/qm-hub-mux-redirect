@@ -1,0 +1,141 @@
+<script type="text/javascript">
+    RED.nodes.registerType('redirect',{
+        category: 'Mux Module',
+        color: '#00FFFF',
+        defaults: {
+            name:{ 
+                value: ""
+            },
+            mapeamento:{ 
+                value:"",
+                type: "mapping-redirect" 
+            },
+            channel_selector:{ 
+                value:""
+            },
+        },
+        inputs:1,
+        outputs:1,
+        icon: "./icons/Redirect.svg",
+        label: function() { return this.name || "Redirect" },
+        paletteLabel: "Redirect",
+        oneditprepare: function() {
+            var ports = []
+            var self = this
+
+            $.getJSON('getMapeamentoMux',function(data) {
+                ports = data  
+                var portType = "custom";
+                for (var i in ports) {
+                    if (self.channel_selector == ports[i].value) {
+                        portType = self.channel_selector;
+                    }
+                }
+                $("#node-config-input-port").typedInput({
+                    default: self.channel_selector,
+                    types:ports
+                });
+            })
+            $("#node-input-mapeamento").val($("#node-input-mapeamento option:first").val());
+        },
+        oneditresize: function() {
+            if(!$("#red-ui-header-button-deploy").hasClass("disabled")){
+                $("#node-dialog-ok").click()
+                $("#red-ui-header-button-deploy").click()
+                $("#red-ui-deploy-dialog-confirm-deploy-deploy").click()
+            }
+        },
+        oneditsave: function() {
+            var mytype = $("#node-config-input-port").typedInput('type');
+
+            $("#node-config-input-port").typedInput('value', mytype);
+            this.channel_selector = $("#node-config-input-port").typedInput('value');
+        }
+    });
+
+</script>
+
+
+<style>
+
+    select#node-input-mapeamento {
+        width: 100%;
+        display: none;
+    }
+
+    a#node-input-lookup-mapeamento {
+    position: absolute;
+    right: -30px !important;
+    top: 0px;
+    }
+
+    label{
+        width: 50% !important;
+        margin-bottom: 2px !important;
+    }
+
+    .columm{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    hr {
+    width: 40% !important;
+    float: left !important;
+    }
+
+    .hr-div-redirect{
+        display: flex !important;
+        justify-content: space-between !important;
+        margin-top: 300px !important;
+    }
+
+    .optional{
+        height: max-content !important;
+        margin-top: 10px !important;
+    }
+
+    .descript{
+        text-align: center;
+    }
+
+</style>
+
+<script type="text/html" data-template-name="redirect">
+
+    <div class="form-row columm">
+        <strong class="descript">
+            
+        Redirect an input to the output of the selected relay.
+        </strong>
+    </div>
+
+    <!-- <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <br> -->
+    <div class="form-row columm">
+        <label for="node-input-channel_selector"><i class="fa fa-list-ul"></i> Channel Selector</label>
+        <input type="text" id="node-config-input-port" style="width:45%">
+        <div style="width:20px; margin-left:200px; margin-top:-34px" selected>
+            <input type="text" id="node-input-mapeamento" placeholder="mapeamento">
+        </div>
+    </div>
+
+    <div class="hr-div-redirect ">
+        <hr>
+        <span class="optional">Optional</span>
+        <hr>
+    </div>
+
+    <div class="form-row columm">
+        <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Component Nickname</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="redirect">
+    <p>Working on it...</p>
+</script>
+
