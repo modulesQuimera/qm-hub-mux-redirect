@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/modulesQuimera/qm-hub-mux-redirect.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["quimera","Hub","JIG"],
+  "author": "HUB-LSE",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/modulesQuimera/qm-hub-mux-redirect/issues"
