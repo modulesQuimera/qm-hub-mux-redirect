@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('redirect',{
         category: 'Mux Module',
-        color: '#00FFFF',
+        color: '#FFFFFF',
         defaults: {
             name:{ 
                 value: ""
@@ -16,27 +16,59 @@
         },
         inputs:1,
         outputs:1,
-        icon: "./icons/Redirect.svg",
-        label: function() { return this.name || "Redirect" },
+        icon: "Mux.svg",
+        label: function() { return this.name? "Redirect - " + this.name: "Redirect" },
         paletteLabel: "Redirect",
         oneditprepare: function() {
             var ports = []
             var self = this
+            var config_mapeamento = RED.nodes.node(this.mapeamento)
+            // console.log(config_mapeamento)
+            if(config_mapeamento){
+                ports = [
+                    {value:config_mapeamento.valuePort1, label:"A01/B01 - " + config_mapeamento.labelPort1, hasValue:false},
+                    {value:config_mapeamento.valuePort2, label: "A02/B02 - " + config_mapeamento.labelPort2, hasValue:false},
+                    {value:config_mapeamento.valuePort3, label: "A03/B03 - " + config_mapeamento.labelPort3, hasValue:false},
+                    {value:config_mapeamento.valuePort4, label: "A04/B04 - " + config_mapeamento.labelPort4, hasValue:false},
+                    {value:config_mapeamento.valuePort5, label: "A05/B05 - " + config_mapeamento.labelPort5, hasValue:false},
+                    {value:config_mapeamento.valuePort6, label: "A06/B06 - " + config_mapeamento.labelPort6, hasValue:false},
+                    {value:config_mapeamento.valuePort7, label: "A07/B07 - " + config_mapeamento.labelPort7, hasValue:false},
+                    {value:config_mapeamento.valuePort8, label: "A08/B08 - " + config_mapeamento.labelPort8, hasValue:false},
+                    {value:config_mapeamento.valuePort9, label: "A09/B09 - " + config_mapeamento.labelPort9, hasValue:false},
+                    {value:config_mapeamento.valuePort10, label: "A10/B10 - " + config_mapeamento.labelPort10, hasValue:false},
+                    {value:config_mapeamento.valuePort11, label: "A11/B11 - " + config_mapeamento.labelPort11, hasValue:false},
+                    {value:config_mapeamento.valuePort12, label: "A12/B12 - " + config_mapeamento.labelPort12, hasValue:false},
+                    {value:config_mapeamento.valuePort13, label: "A13/B13 - " + config_mapeamento.labelPort13, hasValue:false},
+                    {value:config_mapeamento.valuePort14, label: "A14/B14 - " + config_mapeamento.labelPort14, hasValue:false},
+                    {value:config_mapeamento.valuePort15, label: "A15/B15 - " + config_mapeamento.labelPort15, hasValue:false},
+                    {value:config_mapeamento.valuePort16, label: "A16/B16 - " + config_mapeamento.labelPort16, hasValue:false},
+                ];
+            }
+            else{
+                ports = [
+                    {label:"A01/B01 - ", value: "0", hasValue:false},
+                    {label:"A02/B02 - ", value: "1", hasValue:false},
+                    {label:"A03/B03 - ", value: "2", hasValue:false},
+                    {label:"A04/B04 - ", value: "3", hasValue:false},
+                    {label:"A05/B05 - ", value: "4", hasValue:false},
+                    {label:"A06/B06 - ", value: "5", hasValue:false},
+                    {label:"A07/B07 - ", value: "6", hasValue:false},
+                    {label:"A08/B08 - ", value: "7", hasValue:false},
+                    {label:"A09/B09 - ", value: "8", hasValue:false},
+                    {label:"A10/B10 - ", value: "9", hasValue:false},
+                    {label:"A11/B11 - ", value: "10", hasValue:false},
+                    {label:"A12/B12 - ", value: "11", hasValue:false},
+                    {label:"A13/B13 - ", value: "12", hasValue:false},
+                    {label:"A14/B14 - ", value: "13", hasValue:false},
+                    {label:"A15/B15 - ", value: "14", hasValue:false},
+                    {label:"A16/B16 - ", value: "15", hasValue:false},
+                ];
+            }
+            $("#node-config-input-port").typedInput({
+                default: self.channel_selector,
+                types:ports
+            });
 
-            $.getJSON('getMapeamentoMux',function(data) {
-                ports = data  
-                var portType = "custom";
-                for (var i in ports) {
-                    if (self.channel_selector == ports[i].value) {
-                        portType = self.channel_selector;
-                    }
-                }
-                $("#node-config-input-port").typedInput({
-                    default: self.channel_selector,
-                    types:ports
-                });
-            })
-            $("#node-input-mapeamento").val($("#node-input-mapeamento option:first").val());
         },
         oneditresize: function() {
             if(!$("#red-ui-header-button-deploy").hasClass("disabled")){
@@ -57,17 +89,6 @@
 
 
 <style>
-
-    select#node-input-mapeamento {
-        width: 100%;
-        display: none;
-    }
-
-    a#node-input-lookup-mapeamento {
-    position: absolute;
-    right: -30px !important;
-    top: 0px;
-    }
 
     label{
         width: 50% !important;
@@ -106,23 +127,21 @@
     <div class="form-row columm">
         <strong class="descript">
             
-        Redirect an input to the output of the selected relay.
+            Tells which relay is enabling the output, which is enabled.
         </strong>
     </div>
 
-    <!-- <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
-    <br> -->
     <div class="form-row columm">
         <label for="node-input-channel_selector"><i class="fa fa-list-ul"></i> Channel Selector</label>
         <input type="text" id="node-config-input-port" style="width:45%">
-        <div style="width:20px; margin-left:200px; margin-top:-34px" selected>
+        <!-- <div style="width:20px; margin-left:200px; margin-top:-34px" selected>
             <input type="text" id="node-input-mapeamento" placeholder="mapeamento">
-        </div>
+        </div> -->
     </div>
-
+    <div class="form-row">
+        <label for="node-input-mapeamento"><i class="fa fa-map"></i> Mapping</label>
+        <input type="text" id="node-input-mapeamento">
+    </div>
     <div class="hr-div-redirect ">
         <hr>
         <span class="optional">Optional</span>
@@ -136,6 +155,6 @@
 </script>
 
 <script type="text/html" data-help-name="redirect">
-    <p>Working on it...</p>
+    <p>Tells which relay is enabling the output, which is enabled.</p>
 </script>
 
