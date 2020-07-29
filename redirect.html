@@ -3,16 +3,36 @@
         category: 'Mux Module',
         color: '#FFFFFF',
         defaults: {
-            name:{ 
-                value: ""
-            },
-            mapeamento:{ 
-                value:"",
-                type: "mapping-redirect" 
-            },
-            channel_selector:{ 
-                value:""
-            },
+            name:{ value: ""},
+            mapeamento:{ value:"",type: "mapping-redirect" },
+            channel_selector:{ value:""},
+
+            qtdRedirect:{value:0},
+            controle:{value:0},
+            channel_selector1:{ value:""},
+            channel_selector2:{ value:""},
+            channel_selector3:{ value:""},
+            channel_selector4:{ value:""},
+            channel_selector5:{ value:""},
+            channel_selector6:{ value:""},
+            channel_selector7:{ value:""},
+            channel_selector8:{ value:""},
+            channel_selector9:{ value:""},
+            channel_selector10:{ value:""},
+            channel_selector11:{ value:""},
+            channel_selector12:{ value:""},
+            channel_selector13:{ value:""},
+            channel_selector14:{ value:""},
+            channel_selector15:{ value:""},
+            channel_selector16:{ value:""},
+            channel_selector17:{ value:""},
+            channel_selector18:{ value:""},
+            channel_selector19:{ value:""},
+            channel_selector20:{ value:""},
+            channel_selector21:{ value:""},
+            channel_selector22:{ value:""},
+            channel_selector23:{ value:""},
+            channel_selector24:{ value:""},
         },
         inputs:1,
         outputs:1,
@@ -20,8 +40,29 @@
         label: function() { return this.name? "Redirect - " + this.name: "Redirect" },
         paletteLabel: "Redirect",
         oneditprepare: function() {
-            var ports = []
+            var node = this;
             var self = this
+            self.controle = self.qtdRedirect;
+
+            for(var i=1; i<=self.controle; i++){
+                $(".redirect"+i).show();
+            }
+            if(!self.controle || self.controle < 0){
+                self.controle = 0;
+            }
+            $("#addRedirect").click(function(){
+                self.controle = self.controle+1 <= 24 ? self.controle + 1 : 24;
+
+                $(".redirect"+self.controle).show();
+                console.log(self.controle);
+            });
+            $("#remRedirect").click(function(){
+                $(".redirect"+self.controle).hide();
+                self.controle = self.controle-1 >= 0 ? self.controle - 1 : 0;
+                console.log(self.controle);
+            });
+
+            var ports = []
             var config_mapeamento = RED.nodes.node(this.mapeamento)
             // console.log(config_mapeamento)
             if(config_mapeamento){
@@ -68,6 +109,102 @@
                 default: self.channel_selector,
                 types:ports
             });
+            $("#node-config-input-port1").typedInput({
+                default: self.channel_selector1,
+                types:ports
+            });
+            $("#node-config-input-port2").typedInput({
+                default: self.channel_selector2,
+                types:ports
+            });
+            $("#node-config-input-port3").typedInput({
+                default: self.channel_selector3,
+                types:ports
+            });
+            $("#node-config-input-port4").typedInput({
+                default: self.channel_selector4,
+                types:ports
+            });
+            $("#node-config-input-port5").typedInput({
+                default: self.channel_selector5,
+                types:ports
+            });
+            $("#node-config-input-port6").typedInput({
+                default: self.channel_selector6,
+                types:ports
+            });
+            $("#node-config-input-port7").typedInput({
+                default: self.channel_selector7,
+                types:ports
+            });
+            $("#node-config-input-port8").typedInput({
+                default: self.channel_selector8,
+                types:ports
+            });
+            $("#node-config-input-port9").typedInput({
+                default: self.channel_selector9,
+                types:ports
+            });
+            $("#node-config-input-port10").typedInput({
+                default: self.channel_selector10,
+                types:ports
+            });
+            $("#node-config-input-port11").typedInput({
+                default: self.channel_selector11,
+                types:ports
+            });
+            $("#node-config-input-port12").typedInput({
+                default: self.channel_selector12,
+                types:ports
+            });
+            $("#node-config-input-port13").typedInput({
+                default: self.channel_selector13,
+                types:ports
+            });
+            $("#node-config-input-port14").typedInput({
+                default: self.channel_selector14,
+                types:ports
+            });
+            $("#node-config-input-port15").typedInput({
+                default: self.channel_selector15,
+                types:ports
+            });
+            $("#node-config-input-port16").typedInput({
+                default: self.channel_selector16,
+                types:ports
+            });
+            $("#node-config-input-port17").typedInput({
+                default: self.channel_selector17,
+                types:ports
+            });
+            $("#node-config-input-port18").typedInput({
+                default: self.channel_selector18,
+                types:ports
+            });
+            $("#node-config-input-port19").typedInput({
+                default: self.channel_selector19,
+                types:ports
+            });
+            $("#node-config-input-port20").typedInput({
+                default: self.channel_selector20,
+                types:ports
+            });
+            $("#node-config-input-port21").typedInput({
+                default: self.channel_selector21,
+                types:ports
+            });
+            $("#node-config-input-port22").typedInput({
+                default: self.channel_selector22,
+                types:ports
+            });
+            $("#node-config-input-port23").typedInput({
+                default: self.channel_selector23,
+                types:ports
+            });
+            $("#node-config-input-port24").typedInput({
+                default: self.channel_selector24,
+                types:ports
+            });
 
         },
         oneditresize: function() {
@@ -79,79 +216,495 @@
         },
         oneditsave: function() {
             var mytype = $("#node-config-input-port").typedInput('type');
+            var mytype1 = $("#node-config-input-port1").typedInput('type');
+            var mytype2 = $("#node-config-input-port2").typedInput('type');
+            var mytype3 = $("#node-config-input-port3").typedInput('type');
+            var mytype4 = $("#node-config-input-port4").typedInput('type');
+            var mytype5 = $("#node-config-input-port5").typedInput('type');
+            var mytype6 = $("#node-config-input-port6").typedInput('type');
+            var mytype7 = $("#node-config-input-port7").typedInput('type');
+            var mytype8 = $("#node-config-input-port8").typedInput('type');
+            var mytype9 = $("#node-config-input-port9").typedInput('type');
+            var mytype10 = $("#node-config-input-port10").typedInput('type');
+            var mytype11 = $("#node-config-input-port11").typedInput('type');
+            var mytype12 = $("#node-config-input-port12").typedInput('type');
+            var mytype13 = $("#node-config-input-port13").typedInput('type');
+            var mytype14 = $("#node-config-input-port14").typedInput('type');
+            var mytype15 = $("#node-config-input-port15").typedInput('type');
+            var mytype16 = $("#node-config-input-port16").typedInput('type');
+            var mytype17 = $("#node-config-input-port17").typedInput('type');
+            var mytype18 = $("#node-config-input-port18").typedInput('type');
+            var mytype19 = $("#node-config-input-port19").typedInput('type');
+            var mytype20 = $("#node-config-input-port20").typedInput('type');
+            var mytype21 = $("#node-config-input-port21").typedInput('type');
+            var mytype22 = $("#node-config-input-port22").typedInput('type');
+            var mytype23 = $("#node-config-input-port23").typedInput('type');
+            var mytype24 = $("#node-config-input-port24").typedInput('type');
 
             $("#node-config-input-port").typedInput('value', mytype);
             this.channel_selector = $("#node-config-input-port").typedInput('value');
+
+            $("#node-config-input-port1").typedInput('value', mytype1);
+            this.channel_selector1 = $("#node-config-input-port1").typedInput('value');
+
+            $("#node-config-input-port2").typedInput('value', mytype2);
+            this.channel_selector2 = $("#node-config-input-port2").typedInput('value');
+
+            $("#node-config-input-port3").typedInput('value', mytype3);
+            this.channel_selector3 = $("#node-config-input-port3").typedInput('value');
+
+            $("#node-config-input-port4").typedInput('value', mytype4);
+            this.channel_selector4 = $("#node-config-input-port4").typedInput('value');
+
+            $("#node-config-input-port5").typedInput('value', mytype5);
+            this.channel_selector5 = $("#node-config-input-port5").typedInput('value');
+
+            $("#node-config-input-port6").typedInput('value', mytype6);
+            this.channel_selector6 = $("#node-config-input-port6").typedInput('value');
+
+            $("#node-config-input-port7").typedInput('value', mytype7);
+            this.channel_selector7 = $("#node-config-input-port7").typedInput('value');
+
+            $("#node-config-input-port8").typedInput('value', mytype8);
+            this.channel_selector8 = $("#node-config-input-port8").typedInput('value');
+
+            $("#node-config-input-port9").typedInput('value', mytype9);
+            this.channel_selector9 = $("#node-config-input-port9").typedInput('value');
+
+            $("#node-config-input-port10").typedInput('value', mytype10);
+            this.channel_selector10 = $("#node-config-input-port10").typedInput('value');
+
+            $("#node-config-input-port11").typedInput('value', mytype11);
+            this.channel_selector11 = $("#node-config-input-port11").typedInput('value');
+
+            $("#node-config-input-port12").typedInput('value', mytype12);
+            this.channel_selector12 = $("#node-config-input-port12").typedInput('value');
+
+            $("#node-config-input-port13").typedInput('value', mytype13);
+            this.channel_selector13 = $("#node-config-input-port13").typedInput('value');
+
+            $("#node-config-input-port14").typedInput('value', mytype14);
+            this.channel_selector14 = $("#node-config-input-port14").typedInput('value');
+
+            $("#node-config-input-port15").typedInput('value', mytype15);
+            this.channel_selector15 = $("#node-config-input-port15").typedInput('value');
+
+            $("#node-config-input-port16").typedInput('value', mytype16);
+            this.channel_selector16 = $("#node-config-input-port16").typedInput('value');
+
+            $("#node-config-input-port17").typedInput('value', mytype17);
+            this.channel_selector17 = $("#node-config-input-port17").typedInput('value');
+
+            $("#node-config-input-port18").typedInput('value', mytype18);
+            this.channel_selector18 = $("#node-config-input-port18").typedInput('value');
+
+            $("#node-config-input-port19").typedInput('value', mytype19);
+            this.channel_selector19 = $("#node-config-input-port19").typedInput('value');
+
+            $("#node-config-input-port20").typedInput('value', mytype20);
+            this.channel_selector20 = $("#node-config-input-port20").typedInput('value');
+
+            $("#node-config-input-port21").typedInput('value', mytype21);
+            this.channel_selector21 = $("#node-config-input-port21").typedInput('value');
+
+            $("#node-config-input-port22").typedInput('value', mytype22);
+            this.channel_selector22 = $("#node-config-input-port22").typedInput('value');
+
+            $("#node-config-input-port23").typedInput('value', mytype23);
+            this.channel_selector23 = $("#node-config-input-port23").typedInput('value');
+
+            $("#node-config-input-port24").typedInput('value', mytype24);
+            this.channel_selector24 = $("#node-config-input-port24").typedInput('value');
+
+            this.qtdRedirect = this.controle;
         }
     });
-
 </script>
 
 
 <style>
-
     label{
-        width: 50% !important;
+        width: 100% !important;
         margin-bottom: 2px !important;
     }
-
     .columm{
         display: flex !important;
         flex-direction: column !important;
     }
-
     hr {
-    width: 40% !important;
-    float: left !important;
+        width: 40% !important;
+        float: left !important;
     }
-
     .hr-div-redirect{
+        width: 100% !important;
         display: flex !important;
         justify-content: space-between !important;
-        margin-top: 300px !important;
+        /* margin-top: 300px !important; */
     }
-
     .optional{
         height: max-content !important;
         margin-top: 10px !important;
     }
-
     .descript{
         text-align: center;
+    }
+
+    .columm-30{
+        display: flex !important;
+        flex-direction: column !important;
+        width: 30% !important;
+        float: left !important;
+    }
+    .columm-50{
+        display: flex !important;
+        flex-direction: column !important;
+        width: 50% !important;
+        float: left !important;
+    }
+
+
+    .columm-70{
+        display: flex !important;
+        flex-direction: column !important;
+        width: 70% !important;
+        float: left !important;
+    }
+
+    .descript-div{
+        max-width: 444px !important;
+    }
+
+    span.red-ui-typedInput-type-label {
+    /* background: chartreuse; */
+    /* display: block; */
+    width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
+
+    .btn-aln{
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        /* padding-left: 30px; */
+        align-content: center;
+        align-items: flex-end;
     }
 
 </style>
 
 <script type="text/html" data-template-name="redirect">
-
-    <div class="form-row columm">
+    <div class="form-row columm descript-div">
         <strong class="descript">
-            
             Tells which relay is enabling the output, which is enabled.
         </strong>
     </div>
-
-    <div class="form-row columm">
+    <div style=" position: relative; display:flex;">
+        <div class="form-row columm-70">
+            <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Identification Note</label>
+            <input type="text" id="node-input-name" placeholder="Name" style="width: 100%">
+        </div>
+        <div class="form-row columm-30" style="align-items: flex-end !important;">
+            <label style="width: max-content !important; padding-right: 24px;"><i class="fa fa-list-ul"></i> Item</label>
+            <div class="form-row btn-aln" >
+                <a id="addRedirect" class="red-ui-button" ><i class="fa fa-plus"></i></a>
+                <a id="remRedirect" class="red-ui-button" style="margin-right: 5px;" ><i class="fa fa-minus"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="form-row" style="display:flex; justify-content: space-between;">
+        <button  class="btn-uni btn-add"  type="button" id="addRedirect"> <i class="fa fa-plus" style="margin-right: 5px; font-size: 15px;"></i></button>
+        <button class="btn-uni btn-remove"   type="button" id="remRedirect"> <i class="fa fa-trash" style="margin-right: 10px; font-size: 15px;"></i></button>
+    </div> -->
+    <div class="hr-div-redirect ">
+        <hr>
+        <span class="optional">Redirect 0</span>
+        <hr>
+    </div>
+    <div class="form-row columm-70">
         <label for="node-input-channel_selector"><i class="fa fa-list-ul"></i> Channel Selector</label>
-        <input type="text" id="node-config-input-port" style="width:45%">
-        <!-- <div style="width:20px; margin-left:200px; margin-top:-34px" selected>
-            <input type="text" id="node-input-mapeamento" placeholder="mapeamento">
-        </div> -->
+        <input type="text" id="node-config-input-port" style="width:100%">
     </div>
     <div class="form-row">
-        <label for="node-input-mapeamento"><i class="fa fa-map"></i> Mapping</label>
+        <label for="node-input-mapeamento"><i class="fa fa-map"></i> PCI Connection Map</label>
         <input type="text" id="node-input-mapeamento">
     </div>
+
+    <div class="redirect1" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 1</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector1"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port1" style="width:100%">
+        </div>
+    </div>
+
+    <div class="redirect2" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 2</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector2"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port2" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect3" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 3</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector3"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port3" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect4" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 4</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector4"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port4" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect5" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 5</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector5"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port5" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect6" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 6</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector6"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port6" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect7" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 7</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector7"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port7" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect8" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 8</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector8"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port8" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect9" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 9</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector9"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port9" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect10" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 10</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector10"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port10" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect11" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 11</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector11"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port11" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect12" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 12</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector12"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port12" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect13" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 13</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector13"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port13" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect14" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 14</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector14"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port14" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect15" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 15</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector15"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port15" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect16" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 16</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector16"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port16" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect17" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 17</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector17"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port17" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect18" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 18</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector18"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port18" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect19" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 19</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector19"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port19" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect20" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 20</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector20"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port20" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect21" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 21</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector21"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port21" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect22" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 22</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector22"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port22" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect23" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 23</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector23"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port23" style="width:100%">
+        </div>
+    </div>
+    <div class="redirect24" style="display: none;">
+        <div class="hr-div-redirect ">
+            <hr>
+                <span class="optional">Redirect 24</span>
+            <hr>
+        </div>
+        <div class="form-row columm-70">
+            <label for="node-input-channel_selector24"><i class="fa fa-list-ul"></i> Channel Selector</label>
+            <input type="text" id="node-config-input-port24" style="width:100%">
+        </div>
+    </div>
+<!-- 
     <div class="hr-div-redirect ">
         <hr>
         <span class="optional">Optional</span>
         <hr>
     </div>
-
     <div class="form-row columm">
         <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Component Nickname</label>
         <input type="text" id="node-input-name" placeholder="Name">
-    </div>
+    </div> -->
 </script>
 
 <script type="text/html" data-help-name="redirect">
