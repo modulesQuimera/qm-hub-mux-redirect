@@ -1,6 +1,6 @@
 {
   "name": "qm-mux-redirect",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Component multiplexer (MUX) | Node-RED",
   "main": "redirect.js",
   "scripts": {
