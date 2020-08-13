@@ -73,7 +73,7 @@ module.exports = function(RED) {
             var currentMode = globalContext.get("currentMode");
             var slot = globalContext.get("slot");
             var command = {
-                type: " mux_modular_V1_0",
+                type: "mux_modular_V1_0",
                 slot: parseInt(mapeamentoNode.slot),
                 method: "redirect",
                 channel_selector: parseInt(node.channel_selector),
