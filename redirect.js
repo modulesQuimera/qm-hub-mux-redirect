@@ -103,7 +103,7 @@ module.exports = function(RED) {
                 }
             }
             globalContext.set("exportFile", file);
-            console.log(command);
+            
             send(msg);
         });
     }

@@ -1,6 +1,6 @@
 {
   "name": "qm-mux-redirect",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Component multiplexer (MUX) | Node-RED",
   "main": "redirect.js",
   "scripts": {
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/modulesQuimera/qm-hub-mux-redirect.git"
+    "url": "git+https://github.com/modulesQuimera/qm-mux-redirect.git"
   },
   "keywords": ["quimera","Hub","JIG"],
   "author": "HUB-LSE",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/modulesQuimera/qm-hub-mux-redirect/issues"
+    "url": "https://github.com/modulesQuimera/qm-mux-redirect/issues"
   },
-  "homepage": "https://github.com/modulesQuimera/qm-hub-mux-redirect#readme",
+  "homepage": "https://github.com/modulesQuimera/qm-mux-redirect#readme",
   "node-red"     : {
     "nodes": {
         "redirect": "redirect.js"

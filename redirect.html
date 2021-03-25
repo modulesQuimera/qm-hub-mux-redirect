@@ -4,7 +4,7 @@
         color: '#FFFFFF',
         defaults: {
             name:{ value: ""},
-            mapeamento:{ value:"",type: "mapping-redirect" },
+            mapeamento:{ value:"",type: "mux-mapping" },
             channel_selector:{ value:""},
 
             qtdRedirect:{value:0},
@@ -54,55 +54,57 @@
                 self.controle = self.controle+1 <= 24 ? self.controle + 1 : 24;
 
                 $(".redirect"+self.controle).show();
-                console.log(self.controle);
+                
             });
             $("#remRedirect").click(function(){
                 $(".redirect"+self.controle).hide();
                 self.controle = self.controle-1 >= 0 ? self.controle - 1 : 0;
-                console.log(self.controle);
+                
             });
 
             var ports = []
-            var config_mapeamento = RED.nodes.node(this.mapeamento)
-            // console.log(config_mapeamento)
-            if(config_mapeamento){
+            var map = RED.nodes.node(this.mapeamento);
+            if(map){
                 ports = [
-                    {value:config_mapeamento.valuePort1, label:"A01/B01 - " + config_mapeamento.labelPort1, hasValue:false},
-                    {value:config_mapeamento.valuePort2, label: "A02/B02 - " + config_mapeamento.labelPort2, hasValue:false},
-                    {value:config_mapeamento.valuePort3, label: "A03/B03 - " + config_mapeamento.labelPort3, hasValue:false},
-                    {value:config_mapeamento.valuePort4, label: "A04/B04 - " + config_mapeamento.labelPort4, hasValue:false},
-                    {value:config_mapeamento.valuePort5, label: "A05/B05 - " + config_mapeamento.labelPort5, hasValue:false},
-                    {value:config_mapeamento.valuePort6, label: "A06/B06 - " + config_mapeamento.labelPort6, hasValue:false},
-                    {value:config_mapeamento.valuePort7, label: "A07/B07 - " + config_mapeamento.labelPort7, hasValue:false},
-                    {value:config_mapeamento.valuePort8, label: "A08/B08 - " + config_mapeamento.labelPort8, hasValue:false},
-                    {value:config_mapeamento.valuePort9, label: "A09/B09 - " + config_mapeamento.labelPort9, hasValue:false},
-                    {value:config_mapeamento.valuePort10, label: "A10/B10 - " + config_mapeamento.labelPort10, hasValue:false},
-                    {value:config_mapeamento.valuePort11, label: "A11/B11 - " + config_mapeamento.labelPort11, hasValue:false},
-                    {value:config_mapeamento.valuePort12, label: "A12/B12 - " + config_mapeamento.labelPort12, hasValue:false},
-                    {value:config_mapeamento.valuePort13, label: "A13/B13 - " + config_mapeamento.labelPort13, hasValue:false},
-                    {value:config_mapeamento.valuePort14, label: "A14/B14 - " + config_mapeamento.labelPort14, hasValue:false},
-                    {value:config_mapeamento.valuePort15, label: "A15/B15 - " + config_mapeamento.labelPort15, hasValue:false},
-                    {value:config_mapeamento.valuePort16, label: "A16/B16 - " + config_mapeamento.labelPort16, hasValue:false},
+                    { value: map.valueA01, label: `A01 - PIN 39 TP (${map.A01}) | B01 - PIN 40 TP (${map.B01})`, hasValue:false},
+                    { value: map.valueA02, label: `A02 - PIN 37 TP (${map.A02}) | B02 - PIN 38 TP (${map.B02})`, hasValue:false},
+                    { value: map.valueA03, label: `A03 - PIN 35 TP (${map.A03}) | B03 - PIN 36 TP (${map.B03})`, hasValue:false},
+                    { value: map.valueA04, label: `A04 - PIN 33 TP (${map.A04}) | B04 - PIN 34 TP (${map.B04})`, hasValue:false},
+
+                    { value: map.valueA05, label: `A05 - PIN 29 TP (${map.A05}) | B05 - PIN 30 TP (${map.B05})`, hasValue:false},
+                    { value: map.valueA06, label: `A06 - PIN 27 TP (${map.A06}) | B06 - PIN 28 TP (${map.B06})`, hasValue:false},
+                    { value: map.valueA07, label: `A07 - PIN 25 TP (${map.A07}) | B07 - PIN 26 TP (${map.B07})`, hasValue:false},
+                    { value: map.valueA08, label: `A08 - PIN 23 TP (${map.A08}) | B08 - PIN 24 TP (${map.B08})`, hasValue:false},
+
+                    { value: map.valueA09, label: `A09 - PIN 19 TP (${map.A09}) | B09 - PIN 20 TP (${map.B09})`, hasValue:false},
+                    { value: map.valueA10, label: `A10 - PIN 17 TP (${map.A10}) | B10 - PIN 18 TP (${map.B10})`, hasValue:false},
+                    { value: map.valueA11, label: `A11 - PIN 15 TP (${map.A11}) | B11 - PIN 16 TP (${map.B11})`, hasValue:false},
+                    { value: map.valueA12, label: `A12 - PIN 13 TP (${map.A12}) | B12 - PIN 14 TP (${map.B12})`, hasValue:false},
+
+                    { value: map.valueA13, label: `A13 - PIN 11 TP (${map.A13}) | B13 - PIN 10 TP (${map.B13})`, hasValue:false},
+                    { value: map.valueA14, label: `A14 - PIN 9 TP (${map.A14}) | B14 - PIN 8 TP (${map.B14})`, hasValue:false},
+                    { value: map.valueA15, label: `A15 - PIN 5 TP (${map.A15}) | B15 - PIN 6 TP (${map.B15})`, hasValue:false},
+                    { value: map.valueA16, label: `A16 - PIN 3 TP (${map.A16}) | B16 - PIN 4 TP (${map.B16})`, hasValue:false},
                 ];
             }
             else{
                 ports = [
-                    {label:"A01/B01 - ", value: "0", hasValue:false},
-                    {label:"A02/B02 - ", value: "1", hasValue:false},
-                    {label:"A03/B03 - ", value: "2", hasValue:false},
-                    {label:"A04/B04 - ", value: "3", hasValue:false},
-                    {label:"A05/B05 - ", value: "4", hasValue:false},
-                    {label:"A06/B06 - ", value: "5", hasValue:false},
-                    {label:"A07/B07 - ", value: "6", hasValue:false},
-                    {label:"A08/B08 - ", value: "7", hasValue:false},
-                    {label:"A09/B09 - ", value: "8", hasValue:false},
-                    {label:"A10/B10 - ", value: "9", hasValue:false},
-                    {label:"A11/B11 - ", value: "10", hasValue:false},
-                    {label:"A12/B12 - ", value: "11", hasValue:false},
-                    {label:"A13/B13 - ", value: "12", hasValue:false},
-                    {label:"A14/B14 - ", value: "13", hasValue:false},
-                    {label:"A15/B15 - ", value: "14", hasValue:false},
-                    {label:"A16/B16 - ", value: "15", hasValue:false},
+                    {label:"A01 - PIN 39 | B01 - PIN 40", value: "0", hasValue:false},
+                    {label:"A02 - PIN 37 | B02 - PIN 38", value: "1", hasValue:false},
+                    {label:"A03 - PIN 35 | B03 - PIN 36", value: "2", hasValue:false},
+                    {label:"A04 - PIN 33 | B04 - PIN 34", value: "3", hasValue:false},
+                    {label:"A05 - PIN 29 | B05 - PIN 30", value: "4", hasValue:false},
+                    {label:"A06 - PIN 27 | B06 - PIN 28", value: "5", hasValue:false},
+                    {label:"A07 - PIN 25 | B07 - PIN 26", value: "6", hasValue:false},
+                    {label:"A08 - PIN 23 | B08 - PIN 24", value: "7", hasValue:false},
+                    {label:"A09 - PIN 19 | B09 - PIN 20", value: "8", hasValue:false},
+                    {label:"A10 - PIN 17 | B10 - PIN 18", value: "9", hasValue:false},
+                    {label:"A11 - PIN 15 | B11 - PIN 16", value: "10", hasValue:false},
+                    {label:"A12 - PIN 13 | B12 - PIN 14", value: "11", hasValue:false},
+                    {label:"A13 - PIN 11 | B13 - PIN 10", value: "12", hasValue:false},
+                    {label:"A14 - PIN 9 | B14 - PIN 8", value: "13", hasValue:false},
+                    {label:"A15 - PIN 5 | B15 - PIN 6", value: "14", hasValue:false},
+                    {label:"A16 - PIN 3 | B16 - PIN 4", value: "15", hasValue:false},
                 ];
             }
             $("#node-config-input-port").typedInput({
@@ -416,11 +418,7 @@
         <label for="node-input-mapeamento"><i class="fa fa-map"></i> PCI Connection Map</label>
         <input type="text" id="node-input-mapeamento">
     </div>
-
-    <!-- <div class="form-row" style="display:flex; justify-content: space-between;">
-        <button  class="btn-uni btn-add"  type="button" id="addRedirect"> <i class="fa fa-plus" style="margin-right: 5px; font-size: 15px;"></i></button>
-        <button class="btn-uni btn-remove"   type="button" id="remRedirect"> <i class="fa fa-trash" style="margin-right: 10px; font-size: 15px;"></i></button>
-    </div> -->
+    
     <div class="hr-div-redirect ">
         <hr>
         <span class="optional">Redirect 0</span>
